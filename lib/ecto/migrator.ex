@@ -169,9 +169,8 @@ defmodule Ecto.Migrator do
   @spec migrations_path(Ecto.Repo.t, String.t) :: String.t
   def migrations_path(repo, directory \\ "migrations") do
     config = repo.config()
-    priv = config[:priv] || "priv/#{repo |> Module.split |> List.last |> Macro.underscore}"
-    app = Keyword.fetch!(config, :otp_app)
-    Application.app_dir(app, Path.join(priv, directory))
+    priv = config[:priv] || "priv/#{repo |> Module.split() |> List.last() |> Macro.underscore()}"
+    Path.join(priv, directory)
   end
 
   @doc """
